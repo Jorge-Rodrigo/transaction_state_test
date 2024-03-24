@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.text.DecimalFormat;
+import java.util.HashMap;
 import java.util.Map;
 
 
@@ -47,8 +48,12 @@ public class OperacoesController {
 
                     cliente.setSaldo(Double.parseDouble(df.format(cliente.getSaldo())));
                     empresa.setSaldo(Double.parseDouble(df.format(empresa.getSaldo())));
-
-                    return ResponseEntity.status(HttpStatus.OK).body(cliente);
+                    
+                    Map<String, Object> response = new HashMap<>();
+                    response.put("Cliente", cliente);
+                    response.put("Empresa", empresa);
+                    
+                    return ResponseEntity.status(HttpStatus.OK).body(response);
                    
                 } else {
                     return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"message\": \"Saldo Insuficiente\"}");
@@ -81,7 +86,12 @@ public class OperacoesController {
 
                     cliente.setSaldo(Double.parseDouble(df.format(cliente.getSaldo())));
                     empresa.setSaldo(Double.parseDouble(df.format(empresa.getSaldo())));
-                    return ResponseEntity.status(HttpStatus.OK).body(cliente);
+
+                    Map<String, Object> response = new HashMap<>();
+                    response.put("Cliente", cliente);
+                    response.put("Empresa", empresa);
+
+                    return ResponseEntity.status(HttpStatus.OK).body(response);
                 } else {
                     return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"message\": \"Saldo Insuficiente\"}");
                 }
